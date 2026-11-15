@@ -305,7 +305,7 @@ document.getElementById('bookForm').addEventListener('submit', function (e) {
   if (!name || phone.replace(/\D/g, '').length < 9) { r.textContent = "Будь ласка, вкажіть ім'я та номер телефону."; return; }
   var btn = f.querySelector('button'); btn.disabled = true; btn.textContent = 'Надсилаємо…';
   if (f._honey.value) return;
-  fetch('https://formsubmit.co/ajax/aboodm7619@gmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+  fetch('https://formsubmit.co/ajax/ali.ibrahem.ma@gmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({ _subject: 'Нова заявка з сайту — ' + name, _template: 'table', _captcha: 'false', "Ім'я": name, 'Телефон': phone }) })
     .then(function (res) { if (!res.ok) throw new Error(res.status); r.textContent = 'Дякуємо, ' + name + '! Заявку отримано — лікар зв\'яжеться з вами найближчим часом.'; f.reset(); })
     .catch(function () { r.textContent = 'Не вдалося надіслати. Напишіть, будь ласка, у WhatsApp або зателефонуйте: +380 73 268 10 11.'; })
