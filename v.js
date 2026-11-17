@@ -1,0 +1,2 @@
+(function(){try{var d={p_path:location.pathname,p_ref:document.referrer||'',p_ua:navigator.userAgent||'',p_tz:'',p_lang:navigator.language||'',p_screen:screen.width+'x'+screen.height};try{d.p_tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+fetch('https://pkwvvvzbtnlstkxemgyq.supabase.co/rest/v1/rpc/log_visit',{method:'POST',keepalive:true,headers:{'apikey':'sb_publishable_5WJprXBOQzE9c_xjb1JL1g_a9kON6KI','Content-Type':'application/json'},body:JSON.stringify(d)})}catch(e){}})();
