@@ -119,6 +119,7 @@ h3 small{font-size:11.5px;color:var(--mut);font-weight:600}
 .gate .btn{width:100%;margin-top:12px;padding:15px;font-size:16px;border-radius:16px}
 .err{color:var(--bad);font-weight:700;font-size:13.5px;margin-top:10px;min-height:20px}
 .foot{text-align:center;color:var(--mut);font-size:11.5px;font-weight:600;margin-top:14px}
+.camp{width:100%;border-collapse:collapse;font-size:13.5px}.camp th{color:var(--mut);font-weight:700;font-size:11.5px;text-align:center;padding:0 4px 8px}.camp th:first-child{text-align:right}.camp td{padding:9px 4px;border-top:1px solid rgba(255,255,255,.06);text-align:center;font:700 14px Montserrat,sans-serif}.camp td:first-child{text-align:right;font:700 13.5px Cairo,sans-serif}.camp tr.z td{color:var(--mut)}.mk{display:flex;gap:6px;margin-top:14px}.mk input{flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.06);color:#fff;font:600 14px Montserrat,sans-serif;direction:ltr;outline:none}.qk{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.qk button{border:1px solid var(--edge);background:transparent;color:var(--ice2);font:700 12px Montserrat,sans-serif;padding:5px 10px;border-radius:20px}.lnk{margin-top:10px;background:rgba(143,184,255,.12);border:1px solid rgba(143,184,255,.3);border-radius:12px;padding:10px 12px;font:600 13px Montserrat,sans-serif;direction:ltr;word-break:break-all;display:flex;gap:8px;align-items:center}.lnk span{flex:1}.ph{display:inline-block;font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:20px;margin-top:4px;background:rgba(143,184,255,.18);color:var(--ice2);margin-inline-start:4px}.cmt{margin-top:10px;font-size:13.5px;color:var(--ice2);background:rgba(255,255,255,.05);border-radius:12px;padding:8px 10px}.pics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}.pics a{display:block;aspect-ratio:1;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.06)}.pics img{width:100%;height:100%;object-fit:cover}.a-ph{background:rgba(143,184,255,.18);color:#fff;border:1px solid rgba(143,184,255,.35)}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom));background:#fff;color:#081943;font-weight:800;font-size:13.5px;padding:10px 16px;border-radius:14px;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 [hidden]{display:none!important}
 </style>
@@ -157,6 +158,11 @@ h3 small{font-size:11.5px;color:var(--mut);font-weight:600}
           <div class="fs"><i id="f3" style="width:0"></i><span>📝 بعتوا طلب حجز<small id="p3"></small></span><b id="n3">0</b></div>
         </div>
         <div class="subs" id="evsubs"></div>
+      </div>
+      <div class="card"><h3>📣 روابط الستوري والحملات <small>٣٠ يوم</small></h3><div id="camps"></div>
+        <div class="mk"><input id="mkIn" placeholder="story-braces" autocapitalize="none" autocomplete="off" spellcheck="false"><button class="btn sm" id="mkB">اعمل رابط</button></div>
+        <div class="qk" id="qk"><button>story</button><button>bio</button><button>reels</button><button>post</button><button>google</button><button>whatsapp</button></div>
+        <div class="lnk" id="lnk" hidden><span id="lnkT"></span><button class="btn sm" id="lnkC">نسخ</button></div>
       </div>
       <div class="tiles">
         <div class="tile"><div class="v num" id="w7">0</div><div class="l">زوّار آخر ٧ أيام</div></div>
@@ -207,7 +213,7 @@ function src(ref,ua){ua=ua||'';ref=(ref||'').toLowerCase();
   if(ref.indexOf('ortho-ibrahim')>-1)return ['من داخل الموقع','↩️'];
   if(ref)return [ref.replace('https://','').replace('http://','').replace('www.','').split('/')[0],'🔗'];
   return ['رابط مباشر','🔗']}
-var EVN={whatsapp:['ضغط واتساب','💬'],telegram:['ضغط تيليغرام','✈️'],call:['ضغط اتصال','📞'],form_open:['فتح فورم الحجز','📝'],instagram:['فتح الإنستا من الموقع','📸']};
+var EVN={whatsapp:['ضغط واتساب','💬'],telegram:['ضغط تيليغرام','✈️'],call:['ضغط اتصال','📞'],form_open:['فتح فورم الحجز','📝'],instagram:['فتح الإنستا من الموقع','📸'],photo_open:['فتح «أرسل صورة»','📷']};
 var STN={new:'جديد',contacted:'تواصلت',booked:'حجز ✓',noanswer:'ما ردّ'};
 function ago(d){var s=Math.floor((Date.now()-d)/1000);if(s<60)return 'هلق';var m=Math.floor(s/60);if(m<60)return 'قبل '+m+' د';var h=Math.floor(m/60);if(h<24)return 'قبل '+h+' س';return ''}
 function hm(d){return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
@@ -245,7 +251,19 @@ function renderHome(){
   $('p2').textContent=vis?Math.round(contact/vis*100)+'%':'';$('p3').textContent=vis?Math.round(leads30/vis*100)+'%':'';
   setTimeout(function(){$('f1').style.width='100%';$('f2').style.width=Math.max(3,contact/mx*100)+'%';$('f3').style.width=Math.max(3,leads30/mx*100)+'%'},60);
   var sb=$('evsubs');sb.innerHTML='';Object.keys(EVN).forEach(function(k){if(EC[k])sb.appendChild(el('span',null,EVN[k][1]+' '+EVN[k][0]+' '+EC[k]))});
+  renderCamps();
 }
+function renderCamps(){
+  var M={},fv={};V.slice().reverse().forEach(function(v){var k=vk(v);if(v.src&&!fv[k])fv[k]=v.src;if(!v.src)return;var c=M[v.src]||(M[v.src]={u:{},c:0,l:0});c.u[k]=1});
+  E.forEach(function(e){var s=e.src;if(!s||!M[s])return;if(e.type==='whatsapp'||e.type==='telegram'||e.type==='call')M[s].c++});
+  L.forEach(function(l){var s=l.src;if(!s)return;if(!M[s])M[s]={u:{},c:0,l:0};M[s].l++});
+  var box=$('camps');box.innerHTML='';var ks=Object.keys(M).sort(function(a,b){return Object.keys(M[b].u).length-Object.keys(M[a].u).length});
+  if(!ks.length){box.appendChild(el('div','empty','لسا ما في زيارات من روابط خاصة. اعمل رابط تحت وحطه بالستوري 👇'));return}
+  var t=el('table','camp'),h=el('tr');['الرابط','👀 زوّار','💬 تواصل','📝 طلبات'].forEach(function(x){h.appendChild(el('th',null,x))});t.appendChild(h);
+  ks.forEach(function(k){var r=el('tr',M[k].l?'':'z');r.appendChild(el('td',null,k));r.appendChild(el('td',null,Object.keys(M[k].u).length));r.appendChild(el('td',null,M[k].c));r.appendChild(el('td',null,M[k].l));t.appendChild(r)});box.appendChild(t);
+}
+function mkLink(n){n=(n||'').toLowerCase().trim().split(' ').join('-').replace(/[^a-z0-9_-]/g,'').slice(0,40);if(!n){toast('اكتب اسم بالإنكليزي، مثلاً story-aligners');return}var u='https://ortho-ibrahim.com/?s='+n;$('lnkT').textContent=u;$('lnk').hidden=false;$('mkIn').value=n}
+
 function setLead(id,st){rpc('update_lead',{p_code:CODE,p_id:id,p_status:st}).then(function(r){if(r.ok){L.forEach(function(l){if(l.id===id)l.status=st});renderLeads();badge();toast('انحفظت: '+STN[st])}else toast('ما انحفظت، جرّب مرة تانية')})}
 function renderLeads(){
   var box=$('leads');box.innerHTML='';var list=L.filter(function(l){return LF==='all'||l.status===LF});
@@ -254,16 +272,19 @@ function renderLeads(){
     var d=new Date(l.ts),c=el('div','lead st-'+l.status),hd=el('div','hd'),nm=el('div','nm'),wh=el('div','when');
     hd.appendChild(el('div','av',(l.name||'?').trim().charAt(0).toUpperCase()));
     nm.appendChild(el('b',null,l.name));nm.appendChild(el('span',null,l.phone));hd.appendChild(nm);
-    wh.appendChild(el('div',null,dayLabel(d)+' '+hm(d)));wh.appendChild(el('div',null,flag(l.country)+' '+src(l.ref,l.ua)[1]));var ch=el('span','chip c-'+l.status,STN[l.status]);wh.appendChild(ch);hd.appendChild(wh);c.appendChild(hd);
+    wh.appendChild(el('div',null,dayLabel(d)+' '+hm(d)));wh.appendChild(el('div',null,flag(l.country)+' '+src(l.ref,l.ua)[1]));var ch=el('span','chip c-'+l.status,STN[l.status]);wh.appendChild(ch);if(l.kind==='photo')wh.appendChild(el('span','ph','📷 '+l.nphotos));if(l.src)wh.appendChild(el('span','ph','🔗 '+l.src));hd.appendChild(wh);c.appendChild(hd);
+    if(l.comment)c.appendChild(el('div','cmt','💭 '+l.comment));
     var digits=(l.phone||'').replace(/[^0-9]/g,''),acts=el('div','acts');
     var wa=el('a','a-wa','💬 واتساب');wa.href='https://wa.me/'+digits+'?text='+encodeURIComponent('Вітаю, '+l.name+'! Це лікар Ібрагім Алі. Дякую за заявку на консультацію 😊');wa.target='_blank';
     var cl=el('a','a-call','📞 اتصال');cl.href='tel:+'+digits;
     wa.onclick=function(){if(l.status==='new')setLead(l.id,'contacted')};
-    acts.appendChild(wa);acts.appendChild(cl);c.appendChild(acts);
+    acts.appendChild(wa);acts.appendChild(cl);
+    if(l.kind==='photo'){var pb=el('a','a-ph','📷 الصور');pb.href='#';var pics=el('div','pics');pics.hidden=true;pb.onclick=function(ev){ev.preventDefault();if(!pics.hidden){pics.hidden=true;return}pb.textContent='⏳';showPics(l.id,pics,function(){pb.textContent='📷 الصور'})};acts.appendChild(pb);c.appendChild(acts);c.appendChild(pics)}else c.appendChild(acts);
     var sts=el('div','sts');['new','contacted','booked','noanswer'].forEach(function(s){var bt=el('button',l.status===s?'on':'',STN[s]);bt.onclick=function(){setLead(l.id,s)};sts.appendChild(bt)});c.appendChild(sts);
     box.appendChild(c);
   });
 }
+function showPics(id,box,done){fetch(SB+'/functions/v1/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'photos',code:CODE,id:id})}).then(function(r){return r.json()}).then(function(d){box.innerHTML='';(d.urls||[]).forEach(function(u){var a=el('a');a.href=u;a.target='_blank';var im=el('img');im.src=u;im.alt='';a.appendChild(im);box.appendChild(a)});if(!(d.urls||[]).length)box.appendChild(el('div','empty','ما في صور'));box.hidden=false;done()}).catch(function(){toast('ما قدرت جيب الصور');done()})}
 function badge(){var n=L.filter(function(l){return l.status==='new'}).length;$('badge').textContent=n;$('badge').hidden=!n}
 function renderFeed(){
   var G={},GV=[];V.forEach(function(v){var gk=vk(v)+'@'+dayKey(new Date(v.ts));if(G[gk]){G[gk].n++;return}G[gk]={k:'v',ts:v.ts,o:v,n:1};GV.push(G[gk])});var all=GV.concat(E.map(function(e){return {k:'e',ts:e.ts,o:e}})).concat(L.map(function(l){return {k:'l',ts:l.ts,o:l}}));
@@ -278,7 +299,7 @@ function renderFeed(){
     fl.appendChild(el('small',null,a.k==='v'?dv[1]:(a.k==='l'?'📝':(EVN[o.type]||['','•'])[1])));
     if(a.k==='v'){var s=src(o.ref,o.ua);m.appendChild(el('b',null,country(o.country)+' · '+dv[0]));m.appendChild(el('span',null,s[1]+' '+s[0]+(a.n>1?' · فات '+a.n+' مرات':'')))}
     else if(a.k==='e'){m.appendChild(el('b',null,(EVN[o.type]||[o.type])[0]));m.appendChild(el('span',null,country(o.country)+' · '+dv[0]))}
-    else{m.appendChild(el('b',null,'طلب حجز: '+o.name));m.appendChild(el('span',null,o.phone))}
+    else{m.appendChild(el('b',null,(o.kind==='photo'?'📷 استشارة بالصور: ':'طلب حجز: ')+o.name));m.appendChild(el('span',null,o.phone))}
     var ag=ago(d);if(ag)t.appendChild(el('small',null,ag));
     it.appendChild(fl);it.appendChild(m);it.appendChild(t);box.appendChild(it);
   });
@@ -327,6 +348,9 @@ $('go').onclick=function(){var c=$('code').value.trim().toUpperCase();if(!c)retu
 $('code').addEventListener('keydown',function(e){if(e.key==='Enter')$('go').click()});
 $('more').onclick=function(){SHOW+=40;renderFeed()};
 $('notifB').onclick=enablePush;
+$('mkB').onclick=function(){mkLink($('mkIn').value)};$('mkIn').addEventListener('keydown',function(e){if(e.key==='Enter')mkLink($('mkIn').value)});
+[].forEach.call(document.querySelectorAll('#qk button'),function(b){b.onclick=function(){mkLink(b.textContent)}});
+$('lnkC').onclick=function(){var t=$('lnkT').textContent;try{navigator.clipboard.writeText(t).then(function(){toast('✅ انسخ الرابط، حطه بالستوري')},function(){toast('اضغط مطوّل عالرابط وانسخه')})}catch(e){toast('اضغط مطوّل عالرابط وانسخه')}};
 [].forEach.call(document.querySelectorAll('.tabbar button'),function(b){b.onclick=function(){show(b.dataset.v)}});
 [].forEach.call(document.querySelectorAll('#lseg button'),function(b){b.onclick=function(){LF=b.dataset.s;[].forEach.call(document.querySelectorAll('#lseg button'),function(x){x.classList.toggle('on',x===b)});renderLeads()}});
 window.addEventListener('hashchange',function(){var h=location.hash.slice(1);if(h==='leads'||h==='feed')show(h)});
