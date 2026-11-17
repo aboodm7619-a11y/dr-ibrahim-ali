@@ -144,7 +144,7 @@ h3 small{font-size:11.5px;color:var(--mut);font-weight:600}
     <section id="v-home">
       <div class="card notif" id="notif" hidden><div class="ic">🔔</div><div id="notifT"><b>فعّل الإشعارات</b>ليرنّ موبايلك أول ما يجي طلب حجز</div><button class="btn sm" id="notifB">تفعيل</button></div>
       <div class="card hero">
-        <div class="lbl">زيارات اليوم</div>
+        <div class="lbl">زوّار اليوم <small style="opacity:.6;font-weight:600">· كل موبايل مرة</small></div>
         <div class="big num" id="today">0</div>
         <span class="delta" id="delta">–</span>
         <div class="spark" id="spark"></div>
@@ -152,15 +152,15 @@ h3 small{font-size:11.5px;color:var(--mut);font-weight:600}
       </div>
       <div class="card"><h3>من الزيارة للحجز <small>آخر ٣٠ يوم</small></h3>
         <div class="fun">
-          <div class="fs"><i id="f1" style="width:0"></i><span>👀 زاروا الموقع</span><b id="n1">0</b></div>
+          <div class="fs"><i id="f1" style="width:0"></i><span>👀 زوّار الموقع</span><b id="n1">0</b></div>
           <div class="fs"><i id="f2" style="width:0"></i><span>💬 ضغطوا تواصل<small id="p2"></small></span><b id="n2">0</b></div>
           <div class="fs"><i id="f3" style="width:0"></i><span>📝 بعتوا طلب حجز<small id="p3"></small></span><b id="n3">0</b></div>
         </div>
         <div class="subs" id="evsubs"></div>
       </div>
       <div class="tiles">
-        <div class="tile"><div class="v num" id="w7">0</div><div class="l">زيارات آخر ٧ أيام</div></div>
-        <div class="tile"><div class="v num" id="m30">0</div><div class="l">زيارات آخر ٣٠ يوم</div></div>
+        <div class="tile"><div class="v num" id="w7">0</div><div class="l">زوّار آخر ٧ أيام</div></div>
+        <div class="tile"><div class="v num" id="m30">0</div><div class="l">زوّار آخر ٣٠ يوم</div></div>
       </div>
       <div class="card"><h3>من وين إجوا <small>٣٠ يوم</small></h3><div id="srcs"></div></div>
       <div class="card"><h3>الدول <small>٣٠ يوم</small></h3><div id="ctys"></div></div>
@@ -214,6 +214,7 @@ function hm(d){return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-dig
 function dayKey(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function dayLabel(d){var t=new Date();t.setHours(0,0,0,0);var x=new Date(d);x.setHours(0,0,0,0);var n=Math.round((t-x)/864e5);if(n===0)return 'اليوم';if(n===1)return 'مبارح';return d.toLocaleDateString('ar',{weekday:'long',day:'numeric',month:'long'})}
 function countUp(el,to){var from=+el.dataset.v||0;el.dataset.v=to;if(from===to){el.textContent=to;return}var t0=performance.now();function f(t){var p=Math.min(1,(t-t0)/700);p=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*p);if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+function vk(v){return v.vid||((v.ua||'')+'|'+(v.screen||'')+'|'+(v.tz||'')+'|'+(v.country||''))}
 function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
 function spark(days){
   var W=320,H=84,n=days.length,mx=Math.max.apply(null,days)||1,pts=days.map(function(v,i){return [i*(W/(n-1)),H-6-(v/mx)*(H-16)]});
@@ -229,16 +230,17 @@ function rank(box,map,total,icons){
 }
 function renderHome(){
   var now=new Date(),t0=new Date();t0.setHours(0,0,0,0);var y0=new Date(t0.getTime()-864e5);
-  var today=0,yest=0,w7=0,S={},SI={},C={},CI={},b=[];for(var i=0;i<14;i++)b.push(0);
-  V.forEach(function(v){var d=new Date(v.ts);if(d>=t0)today++;else if(d>=y0)yest++;if(now-d<7*864e5)w7++;
-    var x=new Date(d);x.setHours(0,0,0,0);var di=Math.round((t0-x)/864e5);if(di>=0&&di<14)b[13-di]++;
-    var s=src(v.ref,v.ua);S[s[0]]=(S[s[0]]||0)+1;SI[s[0]]=s[1];var c=country(v.country);C[c]=(C[c]||0)+1;CI[c]=flag(v.country)});
-  countUp($('today'),today);countUp($('w7'),w7);countUp($('m30'),V.length);
+  var uT={},uY={},u7={},u30={},uD=[],S={},SI={},C={},CI={},seenS={},seenC={},b=[];for(var i=0;i<14;i++){b.push(0);uD.push({})}
+  V.slice().reverse().forEach(function(v){var d=new Date(v.ts),k=vk(v);if(d>=t0)uT[k]=1;else if(d>=y0)uY[k]=1;if(now-d<7*864e5)u7[k]=1;u30[k]=1;
+    var x=new Date(d);x.setHours(0,0,0,0);var di=Math.round((t0-x)/864e5);if(di>=0&&di<14&&!uD[di][k]){uD[di][k]=1;b[13-di]++}
+    if(!seenS[k]){seenS[k]=1;var s=src(v.ref,v.ua);S[s[0]]=(S[s[0]]||0)+1;SI[s[0]]=s[1];var c=country(v.country);C[c]=(C[c]||0)+1;CI[c]=flag(v.country)}});
+  var today=Object.keys(uT).length,yest=Object.keys(uY).length,w7=Object.keys(u7).length,U=Object.keys(u30).length;
+  countUp($('today'),today);countUp($('w7'),w7);countUp($('m30'),U);
   var dl=$('delta');if(!yest&&!today){dl.className='delta';dl.textContent='ما في زيارات لسا اليوم'}else if(!yest){dl.className='delta up';dl.textContent='▲ مبارح كان صفر'}else{var p=Math.round((today-yest)/yest*100);dl.className='delta '+(p>=0?'up':'dn');dl.textContent=(p>=0?'▲ ':'▼ ')+Math.abs(p)+'% عن مبارح ('+yest+')'}
   spark(b);var a0=new Date(t0.getTime()-13*864e5);$('ax0').textContent=a0.getDate()+'/'+(a0.getMonth()+1);
-  rank($('srcs'),S,V.length||1,SI);rank($('ctys'),C,V.length||1,CI);
+  rank($('srcs'),S,U||1,SI);rank($('ctys'),C,U||1,CI);
   var since=Date.now()-30*864e5,contact=0,EC={};E.forEach(function(e){EC[e.type]=(EC[e.type]||0)+1;if(e.type==='whatsapp'||e.type==='telegram'||e.type==='call')contact++});
-  var leads30=L.filter(function(l){return new Date(l.ts)>=since}).length,vis=V.length||0,mx=Math.max(vis,1);
+  var leads30=L.filter(function(l){return new Date(l.ts)>=since}).length,vis=U||0,mx=Math.max(vis,1);
   countUp($('n1'),vis);countUp($('n2'),contact);countUp($('n3'),leads30);
   $('p2').textContent=vis?Math.round(contact/vis*100)+'%':'';$('p3').textContent=vis?Math.round(leads30/vis*100)+'%':'';
   setTimeout(function(){$('f1').style.width='100%';$('f2').style.width=Math.max(3,contact/mx*100)+'%';$('f3').style.width=Math.max(3,leads30/mx*100)+'%'},60);
@@ -264,7 +266,7 @@ function renderLeads(){
 }
 function badge(){var n=L.filter(function(l){return l.status==='new'}).length;$('badge').textContent=n;$('badge').hidden=!n}
 function renderFeed(){
-  var all=V.map(function(v){return {k:'v',ts:v.ts,o:v}}).concat(E.map(function(e){return {k:'e',ts:e.ts,o:e}})).concat(L.map(function(l){return {k:'l',ts:l.ts,o:l}}));
+  var G={},GV=[];V.forEach(function(v){var gk=vk(v)+'@'+dayKey(new Date(v.ts));if(G[gk]){G[gk].n++;return}G[gk]={k:'v',ts:v.ts,o:v,n:1};GV.push(G[gk])});var all=GV.concat(E.map(function(e){return {k:'e',ts:e.ts,o:e}})).concat(L.map(function(l){return {k:'l',ts:l.ts,o:l}}));
   all.sort(function(a,b){return new Date(b.ts)-new Date(a.ts)});
   $('cnt').textContent=all.length?all.length+' حركة':'';
   var box=$('list');box.innerHTML='';
@@ -274,7 +276,7 @@ function renderFeed(){
     var d=new Date(a.ts),k=dayKey(d),o=a.o;if(k!==last){box.appendChild(el('div','day',dayLabel(d)));last=k}
     var dv=dev(o.ua),it=el('div','it'+(a.k!=='v'?' evt':'')+(a.k==='v'&&SEEN&&o.id>SEEN?' new':'')),fl=el('div','fl',flag(o.country)),m=el('div','m'),t=el('div','t',hm(d));
     fl.appendChild(el('small',null,a.k==='v'?dv[1]:(a.k==='l'?'📝':(EVN[o.type]||['','•'])[1])));
-    if(a.k==='v'){var s=src(o.ref,o.ua);m.appendChild(el('b',null,country(o.country)+' · '+dv[0]));m.appendChild(el('span',null,s[1]+' '+s[0]))}
+    if(a.k==='v'){var s=src(o.ref,o.ua);m.appendChild(el('b',null,country(o.country)+' · '+dv[0]));m.appendChild(el('span',null,s[1]+' '+s[0]+(a.n>1?' · فات '+a.n+' مرات':'')))}
     else if(a.k==='e'){m.appendChild(el('b',null,(EVN[o.type]||[o.type])[0]));m.appendChild(el('span',null,country(o.country)+' · '+dv[0]))}
     else{m.appendChild(el('b',null,'طلب حجز: '+o.name));m.appendChild(el('span',null,o.phone))}
     var ag=ago(d);if(ag)t.appendChild(el('small',null,ag));
