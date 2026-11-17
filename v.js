@@ -1,7 +1,8 @@
 (function(){
 var B='https://pkwvvvzbtnlstkxemgyq.supabase.co',K='sb_publishable_5WJprXBOQzE9c_xjb1JL1g_a9kON6KI';
 function rpc(n,d){try{return fetch(B+'/rest/v1/rpc/'+n,{method:'POST',keepalive:true,headers:{'apikey':K,'Content-Type':'application/json'},body:JSON.stringify(d)})}catch(e){}}
-try{var d={p_path:location.pathname,p_ref:document.referrer||'',p_ua:navigator.userAgent||'',p_tz:'',p_lang:navigator.language||'',p_screen:screen.width+'x'+screen.height};try{d.p_tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+var vid='';try{vid=localStorage.getItem('op_vid')||'';if(!vid){vid=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem('op_vid',vid)}}catch(e){}
+try{var d={p_vid:vid,p_path:location.pathname,p_ref:document.referrer||'',p_ua:navigator.userAgent||'',p_tz:'',p_lang:navigator.language||'',p_screen:screen.width+'x'+screen.height};try{d.p_tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
 rpc('log_visit',d)}catch(e){}
 function ev(t){rpc('log_event',{p_type:t,p_path:location.pathname,p_ref:document.referrer||'',p_ua:navigator.userAgent||''})}
 document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';
