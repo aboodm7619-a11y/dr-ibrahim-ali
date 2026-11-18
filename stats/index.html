@@ -41,6 +41,7 @@ a{color:inherit;text-decoration:none}
 .spark{margin-top:14px;height:84px;direction:ltr}
 .spark svg{width:100%;height:100%;overflow:visible}
 .axis{display:flex;justify-content:space-between;direction:ltr;font:600 10.5px Montserrat,sans-serif;color:var(--mut);margin-top:4px}
+.igp{margin-bottom:10px}.igp .camp th,.igp .camp td{font-size:12px;padding:6px 4px;text-align:center}.igt{font-weight:800;color:#fff;text-decoration:none;display:block;margin-bottom:2px}.igm{font-size:12px;color:var(--mut);margin-bottom:6px}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .tile{background:var(--glass);border:1px solid var(--edge);border-radius:20px;padding:14px 16px}
 .tile .v{font:800 32px Montserrat,sans-serif;line-height:1.1}
@@ -164,6 +165,7 @@ h3 small{font-size:11.5px;color:var(--mut);font-weight:600}
         <div class="qk" id="qk"><button>story</button><button>bio</button><button>reels</button><button>post</button><button>google</button><button>whatsapp</button></div>
         <div class="lnk" id="lnk" hidden><span id="lnkT"></span><button class="btn sm" id="lnkC">نسخ</button></div>
       </div>
+      <div class="card"><h3>📸 أداء الإنستا <small>آخر فحص</small></h3><div id="igb"></div></div>
       <div class="tiles">
         <div class="tile"><div class="v num" id="w7">0</div><div class="l">زوّار آخر ٧ أيام</div></div>
         <div class="tile"><div class="v num" id="m30">0</div><div class="l">زوّار آخر ٣٠ يوم</div></div>
@@ -195,7 +197,7 @@ h3 small{font-size:11.5px;color:var(--mut);font-weight:600}
 
 <script>
 var SB='https://pkwvvvzbtnlstkxemgyq.supabase.co',KEY='sb_publishable_5WJprXBOQzE9c_xjb1JL1g_a9kON6KI';
-var CODE='',V=[],E=[],L=[],VAPID='',SHOW=40,SEEN=0,first=true,timer=null,VIEW='home',LF='all';
+var CODE='',V=[],E=[],L=[],IG=[],VAPID='',SHOW=40,SEEN=0,first=true,timer=null,VIEW='home',LF='all';
 function $(i){return document.getElementById(i)}
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k)||'';localStorage.setItem(k,v)}catch(e){return ''}}
 function rpc(n,d){return fetch(SB+'/rest/v1/rpc/'+n,{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(d)})}
@@ -251,7 +253,7 @@ function renderHome(){
   $('p2').textContent=vis?Math.round(contact/vis*100)+'%':'';$('p3').textContent=vis?Math.round(leads30/vis*100)+'%':'';
   setTimeout(function(){$('f1').style.width='100%';$('f2').style.width=Math.max(3,contact/mx*100)+'%';$('f3').style.width=Math.max(3,leads30/mx*100)+'%'},60);
   var sb=$('evsubs');sb.innerHTML='';Object.keys(EVN).forEach(function(k){if(EC[k])sb.appendChild(el('span',null,EVN[k][1]+' '+EVN[k][0]+' '+EC[k]))});
-  renderCamps();
+  renderCamps();renderIG();
 }
 function renderCamps(){
   var M={},fv={};V.slice().reverse().forEach(function(v){var k=vk(v);if(v.src&&!fv[k])fv[k]=v.src;if(!v.src)return;var c=M[v.src]||(M[v.src]={u:{},c:0,l:0});c.u[k]=1});
@@ -261,6 +263,18 @@ function renderCamps(){
   if(!ks.length){box.appendChild(el('div','empty','لسا ما في زيارات من روابط خاصة. اعمل رابط تحت وحطه بالستوري 👇'));return}
   var t=el('table','camp'),h=el('tr');['الرابط','👀 زوّار','💬 تواصل','📝 طلبات'].forEach(function(x){h.appendChild(el('th',null,x))});t.appendChild(h);
   ks.forEach(function(k){var r=el('tr',M[k].l?'':'z');r.appendChild(el('td',null,k));r.appendChild(el('td',null,Object.keys(M[k].u).length));r.appendChild(el('td',null,M[k].c));r.appendChild(el('td',null,M[k].l));t.appendChild(r)});box.appendChild(t);
+}
+function renderIG(){
+  var box=$('igb');box.innerHTML='';var G={},O=[];IG.forEach(function(p){if(!G[p.shortcode]){G[p.shortcode]=[];O.push(p.shortcode)}G[p.shortcode].push(p)});
+  if(!O.length){box.appendChild(el('div','empty','لسا ما في بوستات متابعة.'));return}
+  O.forEach(function(sc){var s=G[sc].sort(function(a,b){return new Date(b.checked_at)-new Date(a.checked_at)}),p=s[0],q=s[1];
+    var w=el('div','igp');var a=el('a','igt',p.title||sc);a.href='https://www.instagram.com/reel/'+sc+'/';a.target='_blank';w.appendChild(a);
+    var d=new Date(p.checked_at);w.appendChild(el('div','igm','آخر فحص: '+dayLabel(d)+' '+hm(d)+(p.posted_at?' · نزل '+dayLabel(new Date(p.posted_at)):'')));
+    var t=el('table','camp'),r1=el('tr'),r2=el('tr');
+    [['👁 مشاهدات','views'],['👤 أشخاص','viewers'],['🆕 مش متابعين','nonfollowers_pct'],['❤️','likes'],['💬','comments'],['🔖 حفظ','saves'],['📤 مشاركة','shares'],['➕ متابعة','follows']].forEach(function(f){
+      r1.appendChild(el('th',null,f[0]));var v=p[f[1]];var txt=(v==null?'–':v)+(f[1]==='nonfollowers_pct'&&v!=null?'%':'');
+      if(q&&q[f[1]]!=null&&v!=null&&f[1]!=='nonfollowers_pct'&&v-q[f[1]]>0)txt+=' (+'+(v-q[f[1]])+')';r2.appendChild(el('td',null,txt))});
+    t.appendChild(r1);t.appendChild(r2);w.appendChild(t);if(p.note)w.appendChild(el('div','igm',p.note));box.appendChild(w)});
 }
 function mkLink(n){n=(n||'').toLowerCase().trim().split(' ').join('-').replace(/[^a-z0-9_-]/g,'').slice(0,40);if(!n){toast('اكتب اسم بالإنكليزي، مثلاً story-aligners');return}var u='https://ortho-ibrahim.com/?s='+n;$('lnkT').textContent=u;$('lnk').hidden=false;$('mkIn').value=n}
 
@@ -312,7 +326,7 @@ async function load(){
     if(r.status===400||r.status===401||r.status===403){ls('vcode','');gate('الكود غلط، جرّب مرة تانية');return}
     if(!r.ok)throw 0;
     var d=await r.json();var prev=V.length?V[0].id:0;var prevL=L.length?L[0].id:0;
-    V=d.visits||[];E=d.events||[];L=d.leads||[];VAPID=d.vapid||'';
+    V=d.visits||[];E=d.events||[];L=d.leads||[];IG=d.ig||[];VAPID=d.vapid||'';
     if(!first&&!SEEN)SEEN=prev;if(!first&&L.length&&L[0].id>prevL)toast('🦷 طلب حجز جديد: '+L[0].name);first=false;render();
     $('pill').className='pill';$('pillT').textContent='مباشر';$('upd').textContent='آخر تحديث '+hm(new Date())+' · بيتحدّث لحالو';
   }catch(e){$('pill').className='pill off';$('pillT').textContent='ما في نت'}
