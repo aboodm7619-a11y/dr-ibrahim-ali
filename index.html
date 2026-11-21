@@ -14,7 +14,7 @@
 <meta property="og:locale" content="uk_UA">
 <link rel="icon" href="https://dr-ibrahim-ali.netlify.app/img/orthopulse.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["Dentist", "MedicalBusiness"], "name": "Dr. Ibrahim Ali — Ортодонт в Одесі", "alternateName": "Ортодонт Ібрагім Алі", "url": "https://ortho-ibrahim.com/", "image": "https://dr-ibrahim-ali.netlify.app/img/hero.jpg", "logo": "https://dr-ibrahim-ali.netlify.app/img/orthopulse.png", "telephone": "+380732681011", "medicalSpecialty": "Orthodontic", "address": {"@type": "PostalAddress", "addressLocality": "Одеса", "addressCountry": "UA"}, "areaServed": {"@type": "City", "name": "Одеса"}, "knowsLanguage": ["uk", "en"], "sameAs": ["https://www.instagram.com/dr.ibrahiim.dentist/"], "availableService": [{"@type": "MedicalProcedure", "name": "Брекети", "url": "https://ortho-ibrahim.com/brekety"}, {"@type": "MedicalProcedure", "name": "Елайнери", "url": "https://ortho-ibrahim.com/elainery"}, {"@type": "MedicalProcedure", "name": "Дитяча ортодонтія", "url": "https://ortho-ibrahim.com/dytyacha-ortodontiya"}, {"@type": "MedicalProcedure", "name": "Розширення верхньої щелепи (Hyrax, MARPE)", "url": "https://ortho-ibrahim.com/rozshyrennya-shchelepy"}]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Чи не пізно ставити брекети дорослим?", "acceptedAnswer": {"@type": "Answer", "text": "Ні. Ортодонтичне лікування можливе в будь-якому віці, якщо ясна та кістка здорові. Точно скажу після огляду."}}, {"@type": "Question", "name": "Скільки триває лікування?", "acceptedAnswer": {"@type": "Answer", "text": "Залежить від випадку — зазвичай від кількох місяців до двох років. Точний термін назву на консультації."}}, {"@type": "Question", "name": "Чи лікуєте ви дітей?", "acceptedAnswer": {"@type": "Answer", "text": "Так. Раннє ортодонтичне лікування допомагає вчасно виправити прикус і розвиток щелеп — найкраще прийти на огляд заздалегідь."}}, {"@type": "Question", "name": "Брекети чи елайнери — що краще?", "acceptedAnswer": {"@type": "Answer", "text": "Обидва методи працюють. Вибір залежить від складності випадку та вашого способу життя — підберемо разом."}}, {"@type": "Question", "name": "Скільки коштує консультація?", "acceptedAnswer": {"@type": "Answer", "text": "Вартість залежить від вашого випадку — уточнюйте за телефоном +380 73 268 10 11 або в WhatsApp / Telegram."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Чи не пізно ставити брекети дорослим?", "acceptedAnswer": {"@type": "Answer", "text": "Ні. Ортодонтичне лікування можливе в будь-якому віці, якщо ясна та кістка здорові. Точно скажу після огляду."}}, {"@type": "Question", "name": "Скільки триває лікування?", "acceptedAnswer": {"@type": "Answer", "text": "Залежить від випадку — зазвичай від кількох місяців до двох років. Точний термін назву на консультації."}}, {"@type": "Question", "name": "Чи лікуєте ви дітей?", "acceptedAnswer": {"@type": "Answer", "text": "Так. Раннє ортодонтичне лікування допомагає вчасно виправити прикус і розвиток щелеп — найкраще прийти на огляд заздалегідь."}}, {"@type": "Question", "name": "Брекети чи елайнери — що краще?", "acceptedAnswer": {"@type": "Answer", "text": "Обидва методи працюють. Вибір залежить від складності випадку та вашого способу життя — підберемо разом."}}, {"@type": "Question", "name": "Скільки коштує консультація?", "acceptedAnswer": {"@type": "Answer", "text": "Консультація безкоштовна. Вартість самого лікування залежить від вашого випадку, актуальні ціни дивіться в розділі «Ціни»."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Marck+Script&display=swap" rel="stylesheet">
 <style>
@@ -155,6 +155,45 @@ footer{background:#061538;color:#AFC1E6;padding:56px 0 34px}
 .foot img{height:54px;width:auto}
 .foot small{display:block;margin-top:26px;color:#7F93BF}
 .foot .ph{background:rgba(255,255,255,.06);color:#DCE6FA;border-color:rgba(255,255,255,.35)}
+
+/* prices + catalogue */
+.prices{background:radial-gradient(110% 90% at 85% 0%,#1D4FB8 0%,#0E348C 36%,#081F57 68%,#06163F 100%);color:#fff;position:relative;overflow:hidden}
+.prices:before{content:"";position:absolute;width:900px;height:900px;border-radius:50%;border:1.5px solid rgba(255,255,255,.08);right:-420px;top:-380px;pointer-events:none}
+.prices .eyebrow{color:#9DB5E6}.prices h2{color:#fff}
+.prices .lead{color:#C9D8F5;max-width:620px;margin:0;font-size:17px}
+.free{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:34px 0 30px;padding:30px 36px;border-radius:28px;background:#fff;color:var(--navy);box-shadow:0 24px 60px rgba(3,10,35,.38)}
+.free .k{font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#5E78B8}
+.free b{display:block;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.08;margin:6px 0}
+.free p{margin:0;color:var(--muted);font-size:16px;max-width:520px}
+.ptabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.ptabs button{font:inherit;font-weight:700;font-size:15px;cursor:pointer;border-radius:999px;padding:12px 22px;border:1.5px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);color:#fff;transition:.15s}
+.ptabs button:hover{background:rgba(255,255,255,.14)}
+.ptabs button[aria-selected="true"]{background:#fff;color:var(--navy);border-color:#fff}
+.ppanel{display:none;background:rgba(8,26,72,.55);border:1.5px solid rgba(255,255,255,.14);border-radius:28px;padding:8px 36px;box-shadow:0 30px 80px rgba(3,10,35,.35)}
+.ppanel.on{display:block}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.prow:last-child{border-bottom:0}
+.prow .n{font-weight:600;font-size:18px;line-height:1.35}
+.prow .n small{display:block;font-weight:500;font-size:14px;color:#9DB5E6;margin-top:4px}
+.prow .pr{font-weight:800;font-size:24px;white-space:nowrap}
+.prow .pr i{font-style:normal;font-weight:600;font-size:14px;color:#9DB5E6;margin-left:6px}
+.prow.sub .n{padding-left:22px;font-weight:500;font-size:16px;color:#DCE6FA}
+.prow.sub .pr{font-size:21px}
+.pgrp{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#9DB5E6;padding:24px 0 2px}
+.pnote{color:#9DB5E6;font-size:14px;margin:18px 6px 0}
+.cat-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin:68px 0 22px}
+.cat-head h3{font-size:clamp(22px,3vw,30px);margin:0;font-weight:800;color:#fff}
+.cat-head p{margin:6px 0 0;color:#B9CCF2;font-size:15px}
+.cat-row{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#3D5DA8 transparent}
+.cat-row a{flex:0 0 auto;width:min(250px,64vw);scroll-snap-align:start;display:block;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 44px rgba(3,10,35,.45);transition:transform .2s}
+.cat-row a:hover{transform:translateY(-4px)}
+.cat-row img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(3,10,35,.92);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.on{display:flex}
+.lb img{max-height:92vh;max-width:min(92vw,520px);width:auto;height:auto;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb button{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:24px;cursor:pointer}
+.lb .prev{left:16px}.lb .next{right:16px}.lb .x{top:20px;right:20px;transform:none}
+@media(max-width:700px){.ppanel{padding:4px 20px;border-radius:22px}.prow .n{font-size:16px}.prow .pr{font-size:20px}.free{padding:24px}}
 </style>
 </head>
 <body>
@@ -165,6 +204,7 @@ footer{background:#061538;color:#AFC1E6;padding:56px 0 34px}
 <ul>
 <li><a href="#about">Про лікаря</a></li>
 <li><a href="#services">Послуги</a></li>
+<li><a href="#prices">Ціни</a></li>
 <li><a href="#cases">Роботи</a></li>
 <li><a href="#faq">Питання</a></li>
 </ul>
@@ -225,6 +265,31 @@ footer{background:#061538;color:#AFC1E6;padding:56px 0 34px}
 
 </div>
 </section>
+
+<section id="prices" class="prices">
+<div class="wrap">
+<div class="eyebrow">Ціни</div>
+<h2>Прозорий прайс</h2>
+<p class="lead">Знаєте вартість ще до візиту. Остаточну суму лікар називає після консультації та діагностики.</p>
+
+<div class="free">
+<div><div class="k">Перший крок</div><b>Консультація безкоштовна</b><p>Огляд, відповіді на питання та рекомендації від ортодонта. Без зобов'язань.</p></div>
+<a class="btn btn-primary" href="#booking">Записатися</a>
+</div>
+
+<div class="ptabs" role="tablist" aria-label="Категорії цін"><button role="tab" id="b-t-br" aria-controls="t-br" aria-selected="true">Брекети</button><button role="tab" id="b-t-al" aria-controls="t-al" aria-selected="false">Елайнери</button><button role="tab" id="b-t-ap" aria-controls="t-ap" aria-selected="false">Апарати</button><button role="tab" id="b-t-sv" aria-controls="t-sv" aria-selected="false">Супутні послуги</button></div>
+<div class="ppanel on" role="tabpanel" id="t-br" aria-labelledby="b-t-br"><p class="pnote" style="margin:20px 0 0">Ціна вказана за 1 щелепу. Систему підбираємо разом на консультації.</p><div class="prow"><div class="n">Металева лігатурна</div><div class="pr">15 000<i>грн</i></div></div><div class="prow"><div class="n">Металева самолігуюча</div><div class="pr">18 000<i>грн</i></div></div><div class="prow"><div class="n">Керамічна лігатурна<small>естетичні брекети в колір зубів</small></div><div class="pr">20 000<i>грн</i></div></div><div class="prow"><div class="n">Керамічна самолігуюча<small>естетичні брекети в колір зубів</small></div><div class="pr">25 000<i>грн</i></div></div><div class="pgrp">Діагностика перед лікуванням</div><div class="prow"><div class="n">Комплексна діагностика<small>фотопротокол, 3D-сканування, аналіз</small></div><div class="pr">2 500<i>грн</i></div></div></div><div class="ppanel" role="tabpanel" id="t-al" aria-labelledby="b-t-al"><p class="pnote" style="margin:20px 0 0">Кількість кап визначається планом лікування після діагностики.</p><div class="prow"><div class="n">Діагностика для елайнерів</div><div class="pr">1 000<i>грн</i></div></div><div class="prow"><div class="n">До 20 кап</div><div class="pr">1 500<i>€</i></div></div><div class="prow"><div class="n">До 40 кап</div><div class="pr">2 000<i>€</i></div></div><div class="prow"><div class="n">До 60 кап</div><div class="pr">2 500<i>€</i></div></div><div class="prow"><div class="n">Понад 60 кап</div><div class="pr">3 000<i>€</i></div></div></div><div class="ppanel" role="tabpanel" id="t-ap" aria-labelledby="b-t-ap"><div class="prow"><div class="n">Апарат-утримувач місця<small>розпорка</small></div><div class="pr">2 500<i>грн</i></div></div><div class="prow"><div class="n">Піднебінний / лінгвальний бюгель</div><div class="pr">4 500<i>грн</i></div></div><div class="prow"><div class="n">Міофункціональний трейнер</div><div class="pr">5 000<i>грн</i></div></div><div class="prow"><div class="n">Функціональний апарат<small>Твін-блок, Френкеля, Гербста та ін.</small></div><div class="pr">8 000<i>грн</i></div></div><div class="prow"><div class="n">Апарат для дисталізації<small>Pendulum, Distal Jet та ін.</small></div><div class="pr">9 000<i>грн</i></div></div><div class="prow"><div class="n">Апарат Marco Rossa</div><div class="pr">10 000<i>грн</i></div></div><div class="prow"><div class="n">Апарат Hyrax</div><div class="pr">12 000<i>грн</i></div></div><div class="prow"><div class="n">Апарат MSE</div><div class="pr">30 000<i>грн</i></div></div></div><div class="ppanel" role="tabpanel" id="t-sv" aria-labelledby="b-t-sv"><div class="pgrp">Під час лікування</div><div class="prow"><div class="n">Професійна гігієна</div><div class="pr">1 000<i>грн</i></div></div><div class="prow"><div class="n">Активація апарату</div><div class="pr">500<i>грн</i></div></div><div class="prow"><div class="n">Обслуговування брекет-системи</div></div><div class="prow sub"><div class="n">1 щелепа</div><div class="pr">1 400<i>грн</i></div></div><div class="prow sub"><div class="n">2 щелепи</div><div class="pr">1 800<i>грн</i></div></div><div class="prow"><div class="n">Ортодонтичний мікрогвинт</div><div class="pr">3 500<i>грн</i></div></div><div class="prow"><div class="n">Корекція ясен</div><div class="pr">1 500<i>грн</i></div></div><div class="pgrp">Завершення лікування</div><div class="prow"><div class="n">Зняття брекет-системи, комплекс<small>гігієна, зняття, полірування, ретейнер, капа</small></div></div><div class="prow sub"><div class="n">1 щелепа</div><div class="pr">5 500<i>грн</i></div></div><div class="prow sub"><div class="n">2 щелепи</div><div class="pr">11 000<i>грн</i></div></div><div class="prow"><div class="n">Зняття ортодонтичного апарату</div><div class="pr">1 000<i>грн</i></div></div></div>
+<p class="pnote">Орієнтовна вартість. Точний план і ціну лікар визначає після огляду та діагностики.</p>
+
+<div class="cat-head">
+<div><h3>Каталог цін</h3><p>Гортайте, натисніть, щоб відкрити на весь екран.</p></div>
+<a class="btn btn-light" href="/Dr-Ibrahim-Ali-prais.pdf" download>Завантажити PDF</a>
+</div>
+<div class="cat-row" id="catrow"><a href="/katalog/k1.jpg" data-i="0"><img src="/katalog/t1.jpg" alt="Каталог цін, сторінка 1" loading="lazy" width="540" height="960"></a><a href="/katalog/k2.jpg" data-i="1"><img src="/katalog/t2.jpg" alt="Каталог цін, сторінка 2" loading="lazy" width="540" height="960"></a><a href="/katalog/k3.jpg" data-i="2"><img src="/katalog/t3.jpg" alt="Каталог цін, сторінка 3" loading="lazy" width="540" height="960"></a><a href="/katalog/k4.jpg" data-i="3"><img src="/katalog/t4.jpg" alt="Каталог цін, сторінка 4" loading="lazy" width="540" height="960"></a><a href="/katalog/k5.jpg" data-i="4"><img src="/katalog/t5.jpg" alt="Каталог цін, сторінка 5" loading="lazy" width="540" height="960"></a><a href="/katalog/k6.jpg" data-i="5"><img src="/katalog/t6.jpg" alt="Каталог цін, сторінка 6" loading="lazy" width="540" height="960"></a></div>
+</div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Каталог цін"><button class="x" aria-label="Закрити">×</button><button class="prev" aria-label="Назад">‹</button><img alt="Каталог цін"><button class="next" aria-label="Далі">›</button></div>
 
 <section id="cases">
 <div class="wrap">
@@ -288,7 +353,7 @@ footer{background:#061538;color:#AFC1E6;padding:56px 0 34px}
 <details><summary>Скільки триває лікування?</summary><p>Залежить від випадку — зазвичай від кількох місяців до двох років. Точний термін назву на консультації.</p></details>
 <details><summary>Чи лікуєте ви дітей?</summary><p>Так. Раннє ортодонтичне лікування допомагає вчасно виправити прикус і розвиток щелеп — найкраще прийти на огляд заздалегідь.</p></details>
 <details><summary>Брекети чи елайнери — що краще?</summary><p>Обидва методи працюють. Вибір залежить від складності випадку та вашого способу життя — підберемо разом.</p></details>
-<details><summary>Скільки коштує консультація?</summary><p>Вартість залежить від вашого випадку — уточнюйте за телефоном +380 73 268 10 11 або в WhatsApp / Telegram.</p></details>
+<details><summary>Скільки коштує консультація?</summary><p>Консультація безкоштовна. Вартість самого лікування залежить від вашого випадку, актуальні ціни дивіться в розділі «Ціни».</p></details>
 </div>
 </section>
 
@@ -307,6 +372,23 @@ footer{background:#061538;color:#AFC1E6;padding:56px 0 34px}
 </footer>
 <nav class="mbar" aria-label="Швидкий запис"><a class="btn btn-primary" href="#booking">Записатися</a><a class="btn" style="background:#fff;color:#0E348C;border:1.5px solid #D5E0F3" href="tel:+380732681011">Подзвонити</a></nav>
 
+<script>
+(function(){
+ var tabs=document.querySelectorAll('.ptabs button'),pan=document.querySelectorAll('.ppanel');
+ tabs.forEach(function(b){b.addEventListener('click',function(){
+  tabs.forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false')});
+  pan.forEach(function(p){p.classList.toggle('on',p.id===b.getAttribute('aria-controls'))});
+ })});
+ var lb=document.getElementById('lb'),im=lb.querySelector('img'),n=6,i=0;
+ function show(k){i=(k+n)%n;im.src='/katalog/k'+(i+1)+'.jpg'}
+ document.querySelectorAll('#catrow a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show(+a.dataset.i);lb.classList.add('on')})});
+ lb.querySelector('.x').onclick=function(){lb.classList.remove('on')};
+ lb.querySelector('.prev').onclick=function(e){e.stopPropagation();show(i-1)};
+ lb.querySelector('.next').onclick=function(e){e.stopPropagation();show(i+1)};
+ lb.addEventListener('click',function(e){if(e.target===lb)lb.classList.remove('on')});
+ document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+})();
+</script>
 <script>
 document.getElementById('bookForm').addEventListener('submit', function (e) {
   e.preventDefault();
